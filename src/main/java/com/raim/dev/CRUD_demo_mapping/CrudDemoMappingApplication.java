@@ -1,10 +1,7 @@
 package com.raim.dev.CRUD_demo_mapping;
 
 import com.raim.dev.CRUD_demo_mapping.dao.AppDao;
-import com.raim.dev.CRUD_demo_mapping.entity.Course;
-import com.raim.dev.CRUD_demo_mapping.entity.Instructor;
-import com.raim.dev.CRUD_demo_mapping.entity.InstructorDetail;
-import com.raim.dev.CRUD_demo_mapping.entity.Review;
+import com.raim.dev.CRUD_demo_mapping.entity.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -36,8 +33,31 @@ public class CrudDemoMappingApplication {
 			//deleteCourse(appDao);
 			//createCourseAndReviews(appDao);
 			//getCourseAndReviews(appDao);
-			removeCourseWithReviews(appDao);
+			//removeCourseWithReviews(appDao);
+			createCourseAndStudents(appDao);
 		};
+	}
+
+	private void createCourseAndStudents(AppDao appDao) {
+		// create a course
+		Course course1 = new Course("Temu - Buy Freely!");
+		// create the students
+		Student student1 = new Student("Nill", "Cha", "nill@gmail.com");
+		Student student2 = new Student("Mia", "Cha", "mia@gmail.com");
+		Student student3 = new Student("Sunny", "Cha", "sunny@gmail.com");
+		// add students to the course
+		course1.addStudent(student1);
+		course1.addStudent(student2);
+		course1.addStudent(student3);
+		// save the course and obviously its students
+		System.out.println("Saving a course : " + course1);
+		System.out.println("Saving a student : " + student1);
+		System.out.println("Saving a student : " + student2);
+		System.out.println("Saving a student : " + student3);
+
+		appDao.save(course1);
+
+		System.out.println("Done!");
 	}
 
 	private void removeCourseWithReviews(AppDao appDao) {
