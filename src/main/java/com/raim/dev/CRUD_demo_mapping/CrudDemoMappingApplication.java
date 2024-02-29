@@ -34,8 +34,39 @@ public class CrudDemoMappingApplication {
 			//createCourseAndReviews(appDao);
 			//getCourseAndReviews(appDao);
 			//removeCourseWithReviews(appDao);
-			createCourseAndStudents(appDao);
+			//createCourseAndStudents(appDao);
+			//findCourseAndItsStudents(appDao);
+			addCoursesForStudent(appDao);
 		};
+	}
+
+	private void addCoursesForStudent(AppDao appDao) {
+		var id = 2;
+		Student tempStudent = appDao.findStudentAndCoursesByStudentId(id);
+		System.out.println("BEFORE : ");
+		System.out.println(tempStudent);
+		Course course1 = new Course("Python - from Zero to Hero");
+		Course course2 = new Course("Java Masterclass");
+		Course course3 = new Course("Javascript - Front-end professional");
+
+		tempStudent.addCourses(course1);
+		tempStudent.addCourses(course2);
+		tempStudent.addCourses(course3);
+
+		appDao.update(tempStudent);
+		System.out.println("AFTER : ");
+		System.out.println(appDao.findStudentAndCoursesByStudentId(id));
+	}
+
+	private void findCourseAndItsStudents(AppDao appDao) {
+		int id = 10;
+		Course course = appDao.findCourseAndStudentsByCourseId(id);
+
+		System.out.println("Found Course : ");
+		System.out.println(course);
+
+		System.out.println("Students taking this course : ");
+		System.out.println(course.getStudents());
 	}
 
 	private void createCourseAndStudents(AppDao appDao) {

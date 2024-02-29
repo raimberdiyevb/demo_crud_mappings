@@ -3,6 +3,7 @@ package com.raim.dev.CRUD_demo_mapping.dao;
 import com.raim.dev.CRUD_demo_mapping.entity.Course;
 import com.raim.dev.CRUD_demo_mapping.entity.Instructor;
 import com.raim.dev.CRUD_demo_mapping.entity.InstructorDetail;
+import com.raim.dev.CRUD_demo_mapping.entity.Student;
 
 import java.util.List;
 
@@ -33,4 +34,7 @@ public interface AppDao {
     void deleteCourseWithItsReviewsById(int id);
 
     Course findCourseAndStudentsByCourseId(int id);
+    Student findStudentAndCoursesByStudentId(int id);
+
+    void update(Student student);
 }

@@ -3,6 +3,7 @@ package com.raim.dev.CRUD_demo_mapping.dao;
 import com.raim.dev.CRUD_demo_mapping.entity.Course;
 import com.raim.dev.CRUD_demo_mapping.entity.Instructor;
 import com.raim.dev.CRUD_demo_mapping.entity.InstructorDetail;
+import com.raim.dev.CRUD_demo_mapping.entity.Student;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -132,5 +133,22 @@ public class AppDaoImpl implements AppDao{
         );
         query.setParameter("data", id);
         return query.getSingleResult();
+    }
+
+    @Override
+    public Student findStudentAndCoursesByStudentId(int id) {
+        TypedQuery<Student> query = entityManager.createQuery(
+                "select c from Student c "
+                        + "JOIN FETCH c.courses "
+                        + "where c.id = :data", Student.class
+        );
+        query.setParameter("data", id);
+        return query.getSingleResult();
+    }
+
+    @Override
+    @Transactional
+    public void update(Student student) {
+        entityManager.merge(student);
     }
 }
